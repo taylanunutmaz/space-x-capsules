@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\CapsuleFilters;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Capsule as CapsuleResource;
 use App\Models\Capsule;
@@ -13,9 +14,9 @@ class CapsuleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(CapsuleFilters $filters)
     {
-        return CapsuleResource::collection(Capsule::with('missions')->get());
+        return CapsuleResource::collection(Capsule::with('missions')->filter($filters)->get());
     }
 
     /**
