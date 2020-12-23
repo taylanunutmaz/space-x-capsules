@@ -20,6 +20,11 @@ class Capsule extends Model
         'reuse_count',
     ];
 
+    public function getRouteKeyName()
+    {
+        return 'capsule_serial';
+    }
+
     public function missions()
     {
         return $this->hasMany(Mission::class);
