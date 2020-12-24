@@ -46,7 +46,7 @@ class GetSpaceXCapsuleData extends Command
             $this->line('Getting capsule data.');
 
             $client = new \GuzzleHttp\Client();
-            $request = $client->get('https://api.spacexdata.com/v3/capsule');
+            $request = $client->get('https://api.spacexdata.com/v3/capsules');
             $response = $request->getBody();
             $contents = json_decode($response->getContents());
 
