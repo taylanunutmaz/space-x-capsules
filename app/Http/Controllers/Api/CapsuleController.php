@@ -10,9 +10,23 @@ use App\Models\Capsule;
 class CapsuleController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @OA\Get (
+     *     path="/api/capsules",
+     *     @OA\Parameter(
+     *          name="status",
+     *          description="Status Filter",
+     *          required=false,
+     *          in="query",
+     *      ),
+     *     @OA\Response(response="200", description="Display a listing of capsules.", @OA\JsonContent()),
+     *     security={
+     *         {
+     *              "bearerAuth": {},
+     *              "passport": {},
+     *          }
+     *     }
+     * )
+     * @return mixed
      */
     public function index(CapsuleFilters $filters)
     {
@@ -20,10 +34,24 @@ class CapsuleController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
+     * @OA\Get (
+     *     path="/api/capsules/{capsule_serial}",
+     *     @OA\Parameter(
+     *          name="capsule_serial",
+     *          description="Capsule Serial",
+     *          required=true,
+     *          in="path",
+     *      ),
+     *     @OA\Response(response="200", description="Display a capsules.", @OA\JsonContent()),
+     *     security={
+     *         {
+     *              "bearerAuth": {},
+     *              "passport": {},
+     *          }
+     *     }
+     * )
      * @param  \App\Models\Capsule  $capsule
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
     public function show(Capsule $capsule)
     {
