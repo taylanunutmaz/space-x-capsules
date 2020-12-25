@@ -63,7 +63,9 @@ class GetSpaceXCapsuleData extends Command
                     [
                         'capsule_id' => $content->capsule_id,
                         'status' => $content->status,
-                        'original_launch' => Carbon::parse($content->original_launch),
+                        'original_launch' => Carbon::parse(
+                            $content->original_launch
+                        ),
                         'original_launch_unix' => $content->original_launch_unix,
                         'landings' => $content->landings,
                         'landings' => $content->type,

@@ -38,8 +38,6 @@ class AuthController extends Controller
      *      ),
      *      @OA\Response(response="200", description="Register a user.", @OA\JsonContent()),
      * )
-     * @param Request $request
-     * @return mixed
      */
     public function register(Request $request)
     {
@@ -75,8 +73,6 @@ class AuthController extends Controller
      *      ),
      *     @OA\Response(response="200", description="Register a user.", @OA\JsonContent()),
      * )
-     * @param Request $request
-     * @return mixed
      */
     public function login(Request $request)
     {
