@@ -10,20 +10,55 @@ use App\Models\Capsule;
 class CapsuleController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @OA\Get(
+     *     path="/api/capsules",
+     *     @OA\Parameter(
+     *         name="status",
+     *         description="Status Filter",
+     *         required=false,
+     *         in="query",
+     *     ),
+     *     @OA\Response(
+     *         response="200",
+     *         description="Display a listing of capsules.",
+     *         @OA\JsonContent()
+     *     ),
+     *     security={
+     *         {
+     *              "bearerAuth": {},
+     *              "passport": {},
+     *          }
+     *     }
+     * )
      */
     public function index(CapsuleFilters $filters)
     {
-        return CapsuleResource::collection(Capsule::with('missions')->filter($filters)->get());
+        return CapsuleResource::collection(
+            Capsule::with('missions')->filter($filters)->get()
+        );
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Capsule  $capsule
-     * @return \Illuminate\Http\Response
+     * @OA\Get(
+     *     path="/api/capsules/{capsule_serial}",
+     *     @OA\Parameter(
+     *         name="capsule_serial",
+     *         description="Capsule Serial",
+     *         equired=true,
+     *         in="path",
+     *     ),
+     *     @OA\Response(
+     *         response="200",
+     *         description="Display a capsule.",
+     *         @OA\JsonContent()
+     *     ),
+     *     security={
+     *         {
+     *             "bearerAuth": {},
+     *             "passport": {},
+     *         }
+     *     }
+     * )
      */
     public function show(Capsule $capsule)
     {
