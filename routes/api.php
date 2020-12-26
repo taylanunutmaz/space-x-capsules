@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CapsuleController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,4 +23,3 @@ Route::middleware('auth:api')->group(function () {
 
     Route::apiResource('/capsules', CapsuleController::class, ['index', 'show']);
 });
-
