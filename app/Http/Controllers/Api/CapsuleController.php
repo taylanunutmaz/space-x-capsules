@@ -44,7 +44,7 @@ class CapsuleController extends Controller
      *     @OA\Parameter(
      *         name="capsule_serial",
      *         description="Capsule Serial",
-     *         equired=true,
+     *         required=true,
      *         in="path",
      *     ),
      *     @OA\Response(
