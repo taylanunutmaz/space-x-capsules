@@ -7,31 +7,30 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\User;
+use Tests\PassportTestCase;
 
-class CapsuleEndpointsTest extends TestCase
+class CapsuleEndpointsTest extends PassportTestCase
 {
     /**
-     * A basic feature test example.
+     * List capsules unauthenticated.
      *
      * @return void
      */
     public function testListCapsules()
     {
-        $response = $this->json('GET', '/api/capsules');
+        $response = $this->getJson('/api/capsules');
         $response->assertStatus(401);
         $response->assertJson(['message' => "Unauthenticated."]);
     }
 
     /**
-     * A basic feature test example.
+     * List capsules with authenticated user.
      *
      * @return void
      */
-    public function testListCapsulesWithoutMiddleware()
+    public function testListCapsulesWithUser()
     {
-        $this->WithoutMiddleware();
-
-        $response = $this->json('GET', '/api/capsules');
+        $response = $this->getJson('/api/capsules', $this->headers);
         $response->assertStatus(200);
         $response->assertJsonStructure([
             'data' => [
@@ -56,18 +55,16 @@ class CapsuleEndpointsTest extends TestCase
     }
 
     /**
-     * A basic feature test example.
+     * List capsules with status filter and authenticated user.
      *
      * @return void
      */
-    public function testListCapsulesWithStatusFilterWithoutMiddleware()
+    public function testListCapsulesWithStatusFilterAndUser()
     {
-        $this->WithoutMiddleware();
-
         $capsule_statuses = Capsule::all()->pluck('status');
 
         foreach ($capsule_statuses as $status) {
-            $response = $this->json('GET', '/api/capsules', ['status' => $status]);
+            $response = $this->json('GET', '/api/capsules', ['status' => $status], $this->headers);
 
             $response->assertStatus(200);
             $response->assertJsonFragment(['status' => $status]);
@@ -95,7 +92,7 @@ class CapsuleEndpointsTest extends TestCase
     }
 
     /**
-     * A basic feature test example.
+     * Show specific capsule with unauthenticated user.
      *
      * @return void
      */
@@ -103,22 +100,22 @@ class CapsuleEndpointsTest extends TestCase
     {
         $capsule_serial = Capsule::inRandomOrder()->first()->capsule_serial;
 
-        $response = $this->json('GET', "/api/capsules/{$capsule_serial}");
+        $response = $this->getJson("/api/capsules/{$capsule_serial}");
         $response->assertStatus(401);
         $response->assertJson(['message' => "Unauthenticated."]);
     }
 
     /**
-     * A basic feature test example.
+     * Show specific capsule with authenticated user.
      *
      * @return void
      */
-    public function testShowCapsulesWithoutMiddleware()
+    public function testShowCapsulesWithUser()
     {
         $this->WithoutMiddleware();
         $capsule_serial = Capsule::inRandomOrder()->first()->capsule_serial;
 
-        $response = $this->json('GET', "/api/capsules/{$capsule_serial}");
+        $response = $this->getJson("/api/capsules/{$capsule_serial}", $this->headers);
         $response->assertStatus(200);
         $response->assertJsonStructure([
             'data' => [
