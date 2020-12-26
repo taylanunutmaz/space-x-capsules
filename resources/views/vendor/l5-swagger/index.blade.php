@@ -71,7 +71,10 @@
 <script src="{{ l5_swagger_asset($documentation, 'swagger-ui-standalone-preset.js') }}"> </script>
 <script>
 window.onload = function() {
+  @if (env('APP_DEBUG'))
   var passwordClient = @json(\Laravel\Passport\Client::where('password_client', 1)->whereNull('user_id')->first()->makeVisible('secret'));
+  @endif
+
   // Build a system
   const ui = SwaggerUIBundle({
     dom_id: '#swagger-ui',
