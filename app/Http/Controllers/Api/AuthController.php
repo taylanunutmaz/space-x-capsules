@@ -53,7 +53,7 @@ class AuthController extends Controller
 
         $accessToken = $user->createToken('authToken')->accessToken;
 
-        return response([ 'user' => $user, 'access_token' => $accessToken]);
+        return response(['user' => new UserResource($user), 'access_token' => $accessToken], 201);
     }
 
     /**
@@ -87,7 +87,7 @@ class AuthController extends Controller
 
         $accessToken = auth()->user()->createToken('authToken')->accessToken;
 
-        return response(['user' => auth()->user(), 'access_token' => $accessToken]);
+        return response(['user' => new UserResource(auth()->user()), 'access_token' => $accessToken]);
 
     }
 
