@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Builder;
 
 class CapsuleFilters extends QueryFilters
 {
+    const FILTERS = [
+        'status',
+    ];
+
     /**
      * Filter by status.
      *
