@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Traits\Filterable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Capsule extends Model
 {
-    use HasFactory;
+    use HasFactory, Filterable;
 
     protected $fillable = [
         'capsule_serial',
@@ -19,6 +20,11 @@ class Capsule extends Model
         'details',
         'reuse_count',
     ];
+
+    public function getRouteKeyName()
+    {
+        return 'capsule_serial';
+    }
 
     public function missions()
     {

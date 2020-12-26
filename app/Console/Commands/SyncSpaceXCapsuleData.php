@@ -2,27 +2,29 @@
 
 namespace App\Console\Commands;
 
+use App\Events\SyncCapsulesCompleted;
+use App\Events\SyncCapsulesStarted;
 use App\Models\Capsule;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 
-class GetSpaceXCapsuleData extends Command
+class SyncSpaceXCapsuleData extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'space-x:get-capsule-data';
+    protected $signature = 'space-x:sync-capsule-data';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Get SpaceX Capsule Data';
+    protected $description = 'Sync SpaceX Capsule Data';
 
     /**
      * Create a new command instance.
@@ -45,8 +47,10 @@ class GetSpaceXCapsuleData extends Command
         try {
             $this->line('Getting capsule data.');
 
+            event(new SyncCapsulesStarted());
+
             $client = new \GuzzleHttp\Client();
-            $request = $client->get('https://api.spacexdata.com/v3/capsule');
+            $request = $client->get('https://api.spacexdata.com/v3/capsules');
             $response = $request->getBody();
             $contents = json_decode($response->getContents());
 
@@ -63,7 +67,9 @@ class GetSpaceXCapsuleData extends Command
                     [
                         'capsule_id' => $content->capsule_id,
                         'status' => $content->status,
-                        'original_launch' => Carbon::parse($content->original_launch),
+                        'original_launch' => Carbon::parse(
+                            $content->original_launch
+                        ),
                         'original_launch_unix' => $content->original_launch_unix,
                         'landings' => $content->landings,
                         'landings' => $content->type,
@@ -86,6 +92,7 @@ class GetSpaceXCapsuleData extends Command
                 $bar->advance();
             }
 
+
             $bar->finish();
             $this->newLine();
         } catch (Exception $e) {
@@ -96,6 +103,7 @@ class GetSpaceXCapsuleData extends Command
         }
 
         DB::commit();
+        event(new SyncCapsulesCompleted($contents));
         $this->info('The command was successful!');
 
         return 0;
