@@ -34,10 +34,12 @@ php artisan serve
 
 * Go to documentation url `/api/documentation` (if you are using Laravel Develoment Server: http://127.0.0.1:8000/api/documentation).
 
-* Use POST /api/register.
+* Register
+
+  * Use POST /api/register.
 
 * Login
 
   * If you want to use JWT, you can use POST /api/login and click Authorize button top right and paste it `bearerAuth` section with `Bearer {Your JWT}`.
 
-  * Also you can use passport to login. If your APP_DEBUG is true in .env file `client_id` and `client_secret` will fill automatically. You can login with using your login credentials. Click on Authorize button top right.
+  * Also you can use passport(OAuth2) to login. Click on Authorize button top right. If your APP_DEBUG is true in .env file `client_id` and `client_secret` will fill automatically. You can login with using your login credentials.
