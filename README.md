@@ -23,6 +23,7 @@ cd space-x-capsules
 # Do not forget to arrange your .env file with valid database
 cp .env.example .env
 
+composer install
 php artisan migrate
 php artisan passport:install
 php artisan space-x:sync-capsule-data
