@@ -27,6 +27,7 @@ composer install
 php artisan key:generate
 php artisan migrate
 php artisan passport:install
+php artisan l5-swagger:generate
 php artisan space-x:sync-capsule-data
 php artisan serve
 ```
