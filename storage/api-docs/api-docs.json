@@ -7,6 +7,9 @@
     "paths": {
         "/api/register": {
             "post": {
+                "tags": [
+                    "auth"
+                ],
                 "operationId": "App\\Http\\Controllers\\Api\\AuthController::register",
                 "parameters": [
                     {
@@ -48,6 +51,9 @@
         },
         "/api/login": {
             "post": {
+                "tags": [
+                    "auth"
+                ],
                 "operationId": "App\\Http\\Controllers\\Api\\AuthController::login",
                 "parameters": [
                     {
@@ -77,6 +83,9 @@
         },
         "/api/user": {
             "get": {
+                "tags": [
+                    "auth"
+                ],
                 "operationId": "App\\Http\\Controllers\\Api\\AuthController::user",
                 "responses": {
                     "200": {
@@ -98,6 +107,9 @@
         },
         "/api/capsules": {
             "get": {
+                "tags": [
+                    "capsule"
+                ],
                 "operationId": "App\\Http\\Controllers\\Api\\CapsuleController::index",
                 "parameters": [
                     {
@@ -127,6 +139,9 @@
         },
         "/api/capsules/{capsule_serial}": {
             "get": {
+                "tags": [
+                    "capsule"
+                ],
                 "operationId": "App\\Http\\Controllers\\Api\\CapsuleController::show",
                 "parameters": [
                     {
@@ -170,9 +185,9 @@
                 "scheme": "https",
                 "flows": {
                     "password": {
-                        "authorizationUrl": "http://space-x-capsules.test/oauth/authorize",
-                        "tokenUrl": "http://space-x-capsules.test/oauth/token",
-                        "refreshUrl": "http://space-x-capsules.test/token/refresh",
+                        "authorizationUrl": "http://localhost/oauth/authorize",
+                        "tokenUrl": "http://localhost/oauth/token",
+                        "refreshUrl": "http://localhost/token/refresh",
                         "scopes": []
                     }
                 }

@@ -12,6 +12,7 @@ class CapsuleController extends Controller
     /**
      * @OA\Get(
      *     path="/api/capsules",
+     *     tags={"capsule"},
      *     @OA\Parameter(
      *         name="status",
      *         description="Status Filter",
@@ -41,6 +42,7 @@ class CapsuleController extends Controller
     /**
      * @OA\Get(
      *     path="/api/capsules/{capsule_serial}",
+     *     tags={"capsule"},
      *     @OA\Parameter(
      *         name="capsule_serial",
      *         description="Capsule Serial",

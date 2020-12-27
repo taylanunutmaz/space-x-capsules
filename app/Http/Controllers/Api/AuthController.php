@@ -12,6 +12,7 @@ class AuthController extends Controller
     /**
      * @OA\Post (
      *     path="/api/register",
+     *     tags={"auth"},
      *     @OA\Parameter(
      *          name="name",
      *          description="Name",
@@ -59,6 +60,7 @@ class AuthController extends Controller
     /**
      * @OA\Post (
      *     path="/api/login",
+     *     tags={"auth"},
      *     @OA\Parameter(
      *          name="email",
      *          description="Email address",
@@ -94,6 +96,7 @@ class AuthController extends Controller
     /**
      * @OA\Get (
      *     path="/api/user",
+     *     tags={"auth"},
      *     @OA\Response(response="200", description="Register a user.", @OA\JsonContent()),
      *     security={
      *          {
