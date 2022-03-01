@@ -1,6 +1,6 @@
 # Space-X-Capsules
 
-[https://thawing-cliffs-93217.herokuapp.com/api/documentation](DEMO)
+[DEMO](https://thawing-cliffs-93217.herokuapp.com/api/documentation)
 
 ## About Space-X-Capsules
 
